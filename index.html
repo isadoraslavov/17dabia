@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário! ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --rosa-fundo: #FFF5F7;
+            --rosa-claro: #FADADD;
+            --rosa-accent: #EEA9B8;
+            --texto-principal: #6B4E54;
+            --fonte-titulo: 'Cormorant Garamond', serif;
+            --fonte-texto: 'Poppins', sans-serif;
+            --fonte-escrita: 'Great Vibes', cursive;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%;
+            font-family: var(--fonte-texto); color: var(--texto-principal);
+            background-color: var(--rosa-fundo); scroll-behavior: smooth;
+            overflow-x: hidden; position: relative;
+        }
+
+        /* --- BANDEIRINHAS NO TOPO --- */
+        .faixa-bandeirinhas {
+            position: absolute; top: 10px; left: 0;
+            width: 100vw; height: 60px;
+            background-image: url('imagens/bandeirinhas_rosa.png');
+            background-repeat: repeat-x; background-size: contain;
+            z-index: 50; opacity: 0.9;
+        }
+
+        /* --- ABELHA E MÚSICA --- */
+        .abelha { position: fixed; width: 35px; z-index: 1000; pointer-events: none; }
+        .music-control {
+            position: fixed; top: 25px; right: 25px;
+            width: 50px; height: 50px; background: rgba(255,255,255,0.8);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 1001; border: 2px solid var(--rosa-claro);
+        }
+
+        section { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+
+        /* --- SEÇÃO 1: ABERTURA --- */
+        #abertura { background-color: #FEFAFB; }
+        .container-colagem-1 { position: relative; width: 800px; height: 500px; }
+        .img-envelope { width: 400px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; }
+        .texto-envelope { position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); font-family: var(--fonte-escrita); font-size: 2.2rem; z-index: 2; text-align: center; }
+        .img-camera { width: 150px; position: absolute; bottom: 50px; left: 100px; transform: rotate(-8deg); z-index: 3; }
+        .img-buque { width: 130px; position: absolute; top: 50px; right: 100px; transform: rotate(15deg); z-index: 3; }
+
+        /* --- SEÇÃO 2: O CADERNO --- */
+        #caderno { background-image: url('imagens/fundo_papel_rosa.jpg'); background-size: cover; }
+        .caderno-wrapper {
+            width: 90%; max-width: 1000px; height: 80vh;
+            background-image: url('imagens/fundo_caderno_clean.png');
+            background-size: cover; background-position: center;
+            position: relative; display: flex; padding: 40px; border-radius: 15px;
+        }
+
+        /* Lado Esquerdo: Bebê e Vela */
+        .caderno-esquerda { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .img-bebe { width: 180px; border-radius: 50%; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); z-index: 2; }
+        
+        /* VELINHA INTERATIVA */
+        .candle-container { position: relative; width: 50px; margin-top: 15px; cursor: pointer; text-align: center; }
+        .img-vela { width: 100%; height: auto; position: relative; z-index: 2; }
+        .flame {
+            width: 15px; height: 25px; background: radial-gradient(#FFF8E1, #FFD700, #FF4500);
+            border-radius: 50% 50% 20% 20%; position: absolute; top: -20px; left: 50%;
+            transform: translateX(-50%); z-index: 3; animation: flicker 1s infinite alternate;
+            transition: opacity 0.5s ease;
+        }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1); } 100% { transform: translateX(-50%) scale(1.1); } }
+        .flame.apagada { opacity: 0; }
+        .mensagem-vela { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-family: var(--fonte-escrita); font-size: 1.2rem; color: var(--rosa-accent); opacity: 0; transition: 0.5s; white-space: nowrap; }
+        .mensagem-vela.visivel { opacity: 1; }
+
+        /* Lado Direito: Polaroid e Balões */
+        .caderno-direita { flex: 1; position: relative; display: flex; justify-content: center; align-items: center; }
+        .img-baloes { width: 90px; position: absolute; top: 40px; right: 30px; z-index: 5; transform: rotate(5deg); }
+        .img-livrinho { width: 180px; position: absolute; top: 100px; left: 30px; z-index: 1; transform: rotate(-5deg); }
+        .polaroid-wrapper { background: white; padding: 15px 15px 50px 15px; transform: rotate(3deg); box-shadow: 0 10px 20px rgba(0,0,0,0.1); position: relative; z-index: 2; }
+        .img-polaroid { width: 220px; aspect-ratio: 1/1; object-fit: cover; }
+        .texto-polaroid { position: absolute; bottom: 10px; right: 15px; font-family: var(--fonte-escrita); font-size: 1.8rem; color: #E87A90; }
+
+        /* --- SEÇÃO 3: CARTA --- */
+        #carta { background-color: #FEF0F3; }
+        .nota-carta { background: white; width: 70%; max-width: 600px; padding: 50px; position: relative; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .img-laco { width: 50px; position: absolute; top: -25px; left: 50%; transform: translateX(-50%); }
+        .nota-carta p { font-family: var(--fonte-escrita); font-size: 1.6rem; line-height: 1.6; }
+        .img-lirio { width: 100px; position: absolute; bottom: -40px; left: -40px; }
+        .img-urso { width: 90px; position: absolute; bottom: -30px; right: -30px; }
+    </style>
+</head>
+<body>
+
+    <div class="faixa-bandeirinhas"></div>
+    <img src="imagens/abelha_fofa.png" alt="Abelha" class="abelha" id="abelha">
+    
+    <div class="music-control" id="btn-musica">🔇</div>
+    <audio id="musica-tema" loop><source src="audio/musica.mp3" type="audio/mpeg"></audio>
+
+    <section id="abertura">
+        <div class="container-colagem-1">
+            <img src="imagens/envelope_rosa.png" class="img-envelope">
+            <div class="texto-envelope">Para o meu amor,<br>[Nome Dele]</div>
+            <img src="imagens/camera_aesthetic.png" class="img-camera">
+            <img src="imagens/buque_rosa.png" class="img-buque">
+        </div>
+    </section>
+
+    <section id="caderno">
+        <div class="caderno-wrapper">
+            <img src="imagens/baloes_coracao.png" class="img-baloes">
+            
+            <div class="caderno-esquerda">
+                <img src="imagens/foto_bebe.jpg" class="img-bebe">
+                
+                <div class="candle-container" id="vela-box">
+                    <div class="flame" id="fogo"></div>
+                    <img src="imagens/vela_17.png" class="img-vela">
+                    <div class="mensagem-vela" id="msg-vela">Faça um pedido! ✨</div>
+                </div>
+                
+                <p style="text-align: center; max-width: 250px; margin-top: 40px;">Desde pequeno sendo a luz da minha vida...</p>
+            </div>
+
+            <div class="caderno-direita">
+                <img src="imagens/livrinho_atras_clean.png" class="img-livrinho">
+                <div class="polaroid-wrapper">
+                    <img src="imagens/foto_polaroid.jpg" class="img-polaroid">
+                    <div class="texto-polaroid">i love you</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="carta">
+        <div class="nota-carta">
+            <img src="imagens/laco_rosa.png" class="img-laco">
+            <p>Feliz aniversário, meu amor!</p>
+            <p>Espero que seu dia seja tão lindo quanto o seu sorriso. Obrigada por ser você. ❤️</p>
+            <img src="imagens/lirio_rosa.png" class="img-lirio">
+            <img src="imagens/urso_fofo_clean.png" class="img-urso">
+        </div>
+    </section>
+
+    <script>
+        // Abelha
+        const abelha = document.getElementById('abelha');
+        let mX = 0, mY = 0, aX = 0, aY = 0;
+        document.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; });
+        function loop() {
+            aX += (mX - aX) * 0.08; aY += (mY - aY) * 0.08;
+            abelha.style.left = aX + 'px'; abelha.style.top = aY + 'px';
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+        // Música
+        const btn = document.getElementById('btn-musica');
+        const audio = document.getElementById('musica-tema');
+        btn.onclick = () => {
+            if (audio.paused) { audio.play(); btn.innerHTML = '🔊'; }
+            else { audio.pause(); btn.innerHTML = '🔇'; }
+        };
+
+        // Vela
+        const velaBox = document.getElementById('vela-box');
+        const fogo = document.getElementById('fogo');
+        const msg = document.getElementById('msg-vela');
+        velaBox.onclick = () => {
+            fogo.classList.add('apagada');
+            msg.classList.add('visivel');
+        };
+    </script>
+</body>
+</html>

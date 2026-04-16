@@ -13,12 +13,19 @@
             --fonte-escrita: 'Great Vibes', cursive;
         }
 
-        body, html { margin: 0; padding: 0; background-color: var(--rosa-fundo); overflow-x: hidden; font-family: 'Poppins', sans-serif; }
+        body, html { margin: 0; padding: 0; background-color: var(--rosa-fundo); overflow-x: hidden; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
 
+        /* BANDEIRINHAS */
         .faixa-bandeirinhas {
             position: absolute; top: 0; left: 0; width: 100%; height: 50px;
             background-image: url('bandeirinhas_rosa.png');
             background-repeat: repeat-x; background-size: contain; z-index: 100;
+        }
+
+        /* DETALHE NO TOPO ESQUERDO (Para não ficar vazio) */
+        .selo-topo {
+            position: absolute; top: 55px; left: 15px; width: 60px;
+            opacity: 0.8; z-index: 101; transform: rotate(-10deg);
         }
 
         .abelha { position: fixed; width: 35px; z-index: 1000; pointer-events: none; mix-blend-mode: multiply; }
@@ -27,56 +34,87 @@
             position: fixed; top: 60px; right: 20px; width: 40px; height: 40px;
             background: white; border-radius: 50%; display: flex; justify-content: center;
             align-items: center; cursor: pointer; z-index: 1001; border: 1px solid #fadadd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        section { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 20px 0; }
+        /* REDUZINDO O VÁCUO ENTRE SEÇÕES */
+        section { 
+            width: 100vw; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            position: relative; 
+            padding: 60px 0; /* Espaçamento controlado entre as partes */
+        }
 
-        .wrapper-abertura { position: relative; width: 320px; height: 350px; display: flex; justify-content: center; align-items: center; }
-        .img-envelope { width: 100%; height: auto; z-index: 5; }
-        .texto-envelope { position: absolute; top: 55%; width: 220px; text-align: center; font-family: var(--fonte-escrita); font-size: 1.8rem; z-index: 10; color: var(--texto-cor); }
-        .img-camera { width: 120px; position: absolute; bottom: 0px; left: -40px; transform: rotate(-10deg); z-index: 15; }
-        .img-buque { width: 160px; position: absolute; top: -20px; right: -50px; transform: rotate(15deg); z-index: 15; }
-
-        .caderno-bg { background-image: url('fundo_papel_rosa.jpg'); background-size: cover; width: 100%; }
-        .caderno-container { width: 95%; max-width: 400px; background-image: url('fundo_caderno_clean.png'); background-size: 100% 100%; padding: 40px 10px; display: flex; flex-direction: column; align-items: center; margin: 0 auto; }
-        .img-bebe { width: 140px; height: 140px; border-radius: 50%; border: 4px solid white; object-fit: cover; }
+        /* SEÇÃO 1: ENVELOPE */
+        .container-central { position: relative; width: 320px; height: 320px; display: flex; justify-content: center; align-items: center; }
+        .wrapper-envelope { position: relative; width: 280px; z-index: 10; }
+        .img-envelope { width: 100%; height: auto; display: block; }
         
-        .vela-area { position: relative; width: 40px; margin: 10px 0; cursor: pointer; }
+        .texto-envelope { 
+            position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); 
+            width: 75%; text-align: center; font-family: var(--fonte-escrita); 
+            font-size: 1.7rem; z-index: 15; color: var(--texto-cor); line-height: 1.1;
+        }
+        
+        .img-camera { width: 110px; position: absolute; bottom: -10px; left: -25px; transform: rotate(-12deg); z-index: 20; }
+        .img-buque { width: 150px; position: absolute; top: -20px; right: -35px; transform: rotate(15deg); z-index: 20; }
+
+        /* SEÇÃO 2: CADERNO */
+        .caderno-bg { background-image: url('fundo_papel_rosa.jpg'); background-size: cover; width: 100%; padding: 80px 0; }
+        .caderno-container { width: 90%; max-width: 380px; background-image: url('fundo_caderno_clean.png'); background-size: 100% 100%; padding: 50px 10px; display: flex; flex-direction: column; align-items: center; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .img-bebe { width: 130px; height: 130px; border-radius: 50%; border: 4px solid white; object-fit: cover; }
+        
+        .vela-area { position: relative; width: 40px; margin: 15px 0; cursor: pointer; }
         .flame {
             width: 12px; height: 20px; background: radial-gradient(#FFF8E1, #FFD700, #FF4500);
             border-radius: 50% 50% 20% 20%; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
             animation: flicker 0.8s infinite alternate; z-index: 20;
         }
         .flame.apagada { display: none; }
-        @keyframes flicker { 0% { opacity: 0.8; transform: translateX(-50%) scale(1); } 100% { opacity: 1; transform: translateX(-50%) scale(1.1); } }
+        @keyframes flicker { 0% { opacity: 0.8; } 100% { opacity: 1; } }
 
-        .polaroid-box { background: white; padding: 10px 10px 40px 10px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); transform: rotate(2deg); margin-top: 20px; position: relative; }
-        .img-polaroid { width: 180px; height: 180px; object-fit: cover; }
+        .polaroid-box { background: white; padding: 10px 10px 45px 10px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); transform: rotate(2deg); margin-top: 25px; position: relative; }
+        .img-polaroid { width: 170px; height: 170px; object-fit: cover; }
         .texto-polaroid { position: absolute; bottom: 8px; right: 10px; font-family: var(--fonte-escrita); font-size: 1.5rem; color: #E87A90; }
 
-        .papel-carta { background: white; width: 85%; max-width: 400px; padding: 40px 25px; border-radius: 2px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background-image: linear-gradient(#f0f0f0 1px, transparent 1px); background-size: 100% 30px; margin: 0 auto 50px auto; }
+        /* SEÇÃO 3: CARTA */
+        .secao-carta { background-color: #FEF0F3; padding: 100px 0; }
+        .papel-carta { 
+            background: white; width: 85%; max-width: 380px; 
+            padding: 50px 25px 90px 25px; 
+            border-radius: 2px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            background-image: linear-gradient(#f2f2f2 1px, transparent 1px); background-size: 100% 30px; 
+            margin: 0 auto; 
+        }
         .laco-topo { width: 50px; position: absolute; top: -25px; left: 50%; transform: translateX(-50%); z-index: 20; }
-        .papel-carta p { font-family: var(--fonte-escrita); font-size: 1.5rem; color: var(--texto-cor); line-height: 1.7; margin: 10px 0; }
-        .img-lirio-final { width: 100px; position: absolute; bottom: -10px; left: -20px; z-index: 25; }
-        .img-urso-final { width: 100px; position: absolute; bottom: -10px; right: -20px; z-index: 25; }
+        .papel-carta p { font-family: var(--fonte-escrita); font-size: 1.5rem; color: var(--texto-cor); line-height: 1.6; margin: 10px 0; }
+        
+        .img-lirio-final { width: 85px; position: absolute; bottom: 10px; left: -5px; z-index: 25; }
+        .img-urso-final { width: 85px; position: absolute; bottom: 10px; right: -5px; z-index: 25; }
     </style>
 </head>
 <body>
 
     <div class="faixa-bandeirinhas"></div>
+    
+    <img src="laco_rosa.png" class="selo-topo"> 
+    
     <img src="abelha_fofa.png" class="abelha" id="abelha">
     
     <div class="music-control" id="btn-musica">🔇</div>
     <audio id="musica-tema" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
     <section>
-        <div class="wrapper-abertura">
-            <img src="envelope_rosa.png" class="img-envelope">
-            <div class="texto-envelope">
-                Para alguém especial,<br> Isadora 
-            </div>
+        <div class="container-central">
             <img src="camera_aesthetic.png" class="img-camera">
             <img src="buque_rosa.png" class="img-buque">
+            
+            <div class="wrapper-envelope">
+                <img src="envelope_rosa.png" class="img-envelope">
+                <div class="texto-envelope">
+                    Para alguém especial,<br> Isadora 
+                </div>
+            </div>
         </div>
     </section>
 
@@ -87,7 +125,9 @@
                 <div class="flame" id="fogo"></div>
                 <img src="vela_17.png" style="width: 100%;">
             </div>
+            
             <p style="text-align: center; font-size: 0.8rem; color: #888;">Sempre iluminando tudo...</p>
+            
             <div class="polaroid-box">
                 <img src="foto_polaroid.jpg" class="img-polaroid">
                 <div class="texto-polaroid">tão linda...</div>
@@ -95,11 +135,13 @@
         </div>
     </section>
 
-    <section style="background-color: #FEF0F3;">
+    <section class="secao-carta">
         <div class="papel-carta">
             <img src="laco_rosa.png" class="laco-topo">
+            
             <p>Feliz aniversário! ✨</p>
             <p>Dizem que as melhores surpresas chegam sem aviso, e conhecer você foi exatamente assim. Que esse seja o primeiro de muitos.</p>
+            
             <img src="lirio_rosa.png" class="img-lirio-final">
             <img src="urso_fofo_clean.png" class="img-urso-final">
         </div>
